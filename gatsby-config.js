@@ -7,9 +7,9 @@ module.exports = {
     },
     description: `Chao's personal technical blog.`,
     siteUrl: `https://chao.blog/`,
-    social: {
-      // twitter: `kylemathews`,
-    },
+    // social: {
+    //   twitter: `chaozhangdev`,
+    // },
   },
   plugins: [
     `gatsby-plugin-image`,
@@ -50,7 +50,7 @@ module.exports = {
               classPrefix: "language-",
               inlineCodeMarker: null,
               aliases: {},
-              showLineNumbers: true,
+              showLineNumbers: false,
               noInlineHighlight: false,
               languageExtensions: [
                 {
@@ -66,16 +66,11 @@ module.exports = {
                   },
                 },
               ],
-              // Customize the prompt used in shell output
-              // Values below are default
               prompt: {
                 user: "root",
                 host: "localhost",
                 global: false,
               },
-              // By default the HTML entities <>&'" are escaped.
-              // Add additional HTML escapes by providing a mapping
-              // of HTML entities and their escape value IE: { '}': '&#123;' }
               escapeEntities: {},
             },
           },

@@ -18,6 +18,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           nodes {
             id
             fields {
+              readingTime {
+                text
+              }
               slug
             }
           }

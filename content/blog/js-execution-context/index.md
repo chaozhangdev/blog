@@ -39,10 +39,6 @@ first()
 console.log("Inside Global Execution Context")
 ```
 
-An Execution Context Stack for the above code:
-
-![alt text](https://miro.medium.com/max/2000/1*ACtBy8CIepVTOSYcVwZ34Q.png)
-
 <!-- When the above code loads in the browser, the Javascript engine creates a global execution context and pushes it to the current execution stack. When a call to `first()` is encountered, the Javascript engines creates a new execution context for that function and pushes it to the top of the current execution stack.
 
 When the `second()` function is called from within the `first()` function, the Javascript engine creates a new execution context for that function and pushes it to the top of the current execution stack. When the `second()` function finishes, its execution context is popped off from the current stack, and the control reaches to the execution context below it, that is the `first()` function execution context.
@@ -323,7 +319,7 @@ This is, what we call hoisting.
 
 **Note** — During the execution phase, if the JavaScript engine couldn’t find the value of `let` variable at the actual place it was declared in the source code, then it will assign it the value of `undefined`.
 
-[Refernece](https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-javascript-1c9ea8642dd0)
+<!-- [Refernece](https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-javascript-1c9ea8642dd0) -->
 
 <!--
 ## Type of execution context
