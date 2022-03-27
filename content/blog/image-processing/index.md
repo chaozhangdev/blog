@@ -8,11 +8,11 @@ date: 2019-06-20
 
 The original image:
 
-<img src='../../.vuepress/images/image-processing/1-1.png' width=50% />
+![img](./1-1.png)
 
 The modified color image after applying the histogram equalization algorithm to R, G, and B channels separately
 
-<img src='../../.vuepress/images/image-processing/1-2.png' width=50% />
+![img](./1-2.png)
 
 Java Solution:
 
@@ -73,7 +73,7 @@ public class P1 {
 
 Transfer the original image from GRB model to HSV model. Applying the histogram equalization to v which is the value in HSV. Transfer the processed HSV color image back to GRB model.
 
-<img src='../../.vuepress/images/image-processing/1-4.png' width=50% />
+![img](./1-4.png)
 
 Java Solution
 
@@ -238,11 +238,11 @@ public class P2 {
 
 The original image:
 
-<img src='../../.vuepress/images/image-processing/2-1.png' width=50% />
+![img](./2-1.png)
 
 The processed image by applying the pseudo color:
 
-<img src='../../.vuepress/images/image-processing/2-2.png' width=50% />
+![img](./2-2.png)
 
 Java Solution
 
@@ -326,19 +326,19 @@ public class P3 {
 
 horizontal edge image:
 
-<img src='../../.vuepress/images/image-processing/3-1.png' width=50% />
+![img](./3-1.png)
 
 vertical edge image:
 
-<img src='../../.vuepress/images/image-processing/3-2.png' width=50% />
+![img](./3-2.png)
 
 gradient image:
 
-<img src='../../.vuepress/images/image-processing/3-3.png' width=50% />
+![img](./3-3.png)
 
 thresholded gradient image using a threshold of TE = 128:
 
-<img src='../../.vuepress/images/image-processing/3-4.png' width=50% />
+![img](./3-4.png)
 
 Java Solution
 
@@ -410,23 +410,23 @@ public class P1 {
 
 w=1
 
-<img src='../../.vuepress/images/image-processing/4-1.png' width=50% />
+![img](./4-1.png)
 
 w=2
 
-<img src='../../.vuepress/images/image-processing/4-2.png' width=50% />
+![img](./4-2.png)
 
 w=3
 
-<img src='../../.vuepress/images/image-processing/4-3.png' width=50% />
+![img](./4-3.png)
 
 w=4
 
-<img src='../../.vuepress/images/image-processing/4-4.png' width=50% />
+![img](./4-4.png)
 
 w=5
 
-<img src='../../.vuepress/images/image-processing/4-5.png' width=50% />
+![img](./4-5.png)
 
 Java Solution
 

@@ -18,9 +18,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           nodes {
             id
             fields {
-              readingTime {
-                text
-              }
               slug
             }
           }
@@ -47,7 +44,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     posts.forEach((post, index) => {
       const previousPostId = index === 0 ? null : posts[index - 1].id
       const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
-
       createPage({
         path: post.fields.slug,
         component: blogPost,
@@ -66,7 +62,6 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 
   if (node.internal.type === `MarkdownRemark`) {
     const value = createFilePath({ node, getNode })
-
     createNodeField({
       name: `slug`,
       node,

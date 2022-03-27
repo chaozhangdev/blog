@@ -98,6 +98,10 @@ hr {
   border: 0;
 }
 
+img {
+  border-radius: 5px;
+}
+
 /* Heading */
 
 h1,

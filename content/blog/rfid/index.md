@@ -24,7 +24,7 @@ The system we designed includes two antennas. One is for receiving the signal an
 
 In application, for example many cars are on the road at the same time, multiple chipless tags may be close to each other just like the graph shown below.
 
-![Alt Text](../../.vuepress/images/rfid/1.png)
+![img](1.png)
 
 RX(reader) interprets all interrogation signal tags. For chips including tags, they may have some components to turn off response but for the chip-less tags it is unfortunately that they will mess up because all chip-less tags respond simultaneously. Once collision happens, they all response their own ID by attenuating the interrogation signal. For the received signal, it may be all the collision signals from all tags.
 
@@ -38,7 +38,7 @@ The usage of Chip-less RFID tags and UAV technologies each have their own securi
 
 An LFM signal is defined as:
 
-![Alt Text](../../.vuepress/images/rfid/2.png)
+![img](2.png)
 
 In other situations, x(t) is equal to 0.
 
@@ -52,18 +52,18 @@ C In chirp separation, we used to use Short Time Fourier Transform (STFT) or oth
 For any real α, the α-angle fractional Fourier transform of a function ƒ is denoted
 by Fα(u) and defined by:
 
-![Alt Text](../../.vuepress/images/rfid/3.png)
+![img](3.png)
 
 The most important part is that FrFT has a rotation angle. Then we can use this
 formula to calculate the angle α.
 
-<!-- ![Alt Text](../.vuepress/images/rfid/4.png) -->
+![img](4.png)
 
 fs for sampling frequency, N for numbers of data points and r
 for chirp rate. We also can use rotation angle to calculate the order of transform α which
 is α=2\*φ /3.14.
 
-![Alt Text](../../.vuepress/images/rfid/5.png)
+![img](5.png)
 
 ### Current Threats to RFID
 
@@ -71,7 +71,7 @@ The current threats to RFID technology primarily include (but are not necessaril
 
 "Eavesdropping occurs when an attacker intercepts data with a compliant reader—one for the correct tag family and frequency—while a tag is being read by an authorized RFID reader". Eavesdropping ties into other attack methods such as replay attacks, spoofing, and cloning. Replay attacks are based around an attacker recording the information that is exchanged between the reader and the tag, and then plays it back to the reader to imitate the recorded tag. In the cases of a spoofing attack, the attacker would send out the signal that a reader would send to a tag, or vice versa in order to trick the reader, or obtain information on the RFID tag that it would otherwise only give to an authorized reader.
 
-![Alt Text](../../.vuepress/images/rfid/6.png)
+![img](6.png)
 
 In addition to the above, another large security risk with RFID technology is RFID
 Cloning. A RFID cloning attack produces genuine tags" replicas, which are usually

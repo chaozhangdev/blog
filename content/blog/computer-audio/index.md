@@ -4,8 +4,6 @@ description: Identification of voice disguise.
 date: 2018-09-12
 ---
 
-<!-- <img src='../../.vuepress/images/computer-audio/1.png' /> -->
-
 ## Abstract
 
 Voice disguise has raised people’s attention recently for been widely used in illegal applications, such as wire fraud and kidnapping which has a huge negative impact on audio authenticity. Identification of disguised voices seems extreamly important especially in some fields where audio forensics are required such as law enforcement. This study will review types of disguised voices and mainly analyzes deliberate voice disguise in detail.
@@ -120,11 +118,11 @@ Time scale modification plays a significent role in data compresssion, speech sy
 In SOLA, an original voice signal is firstly decomposed into successive short frames. For obtaining time stretching or compressing, some frames are changed like repeating or discarding while some of frames are remained and it is straightforward to show in plots. As illustrated in Fig.1, the 3rd frame of the original voice is repeated for voice stretching and the 3rd frame of the original signal in Fig.2 is discarded for voice compressing.
 
 Fig. 1: Time stretching in the SOLA algorithm.
-![Alt Text](../../.vuepress/images/computer-audio/1.png)
+![img](1.png)
 
 Fig. 2: Time compressing in the SOLA algorithm.
 
-![Alt Text](../../.vuepress/images/computer-audio/2.png)
+![img](2.png)
 
 During time-scale modification, we use the factor α to modify the duration from D' to D and the duration is changed without affecting X(ω)' and P. As two equations shown below, the resampling factor 1/α is used to disguise the signal from x(n) to x'(n).
 
@@ -166,7 +164,7 @@ The identification algorithm is based on MFCC statistical moments and SVM classi
 
 Fig. 3: General identification system of disguised voices.
 
-![Alt Text](../../.vuepress/images/computer-audio/3.png)
+![img](3.png)
 
 In the training stage, firstly we have orignal voice set and disguised voice set with N different semitones. Then we extract training features of each through training to N SVM classifiers for testing to determine the disguise result for each classifier.
 

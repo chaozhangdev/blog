@@ -12,33 +12,32 @@ The parent component passes data to the child component through `props`, and the
 
 The following is an example to illustrate how the parent component transmits data to the child component: How to get the data in the parent component section.vue in the child component article.vue articles: `['Introduction to Web Dev', 'Computer Network', 'CSS in 30s']`
 
-```vue
+```html
 // parent component
 <template>
   <div class="section">
     <com-article :articles="articleList"></com-article>
   </div>
 </template>
-
 <script>
-import comArticle from "./test/article.vue"
-export default {
-  name: "HelloWorld",
-  components: { comArticle },
-  data() {
-    return {
-      articleList: [
-        "Introduction to Web Dev",
-        "Computer Network",
-        "CSS in 30s",
-      ],
-    }
-  },
-}
+  import comArticle from "./test/article.vue"
+  export default {
+    name: "HelloWorld",
+    components: { comArticle },
+    data() {
+      return {
+        articleList: [
+          "Introduction to Web Dev",
+          "Computer Network",
+          "CSS in 30s",
+        ],
+      }
+    },
+  }
 </script>
 ```
 
-```vue
+```html
 // child component
 <template>
   <div>
@@ -47,9 +46,9 @@ export default {
 </template>
 
 <script>
-export default {
-  props: ["articles"],
-}
+  export default {
+    props: ["articles"],
+  }
 </script>
 ```
 
@@ -60,7 +59,7 @@ export default {
 My own understanding of $emit is this: $emit binds a custom event, when this statement is executed, the parameter arg is passed to the parent component, and the parent component monitors and receives parameters through v-on. Through an example, how to transfer data from the child component to the parent component.
 On the basis of the previous example, click on the item of the ariticle rendered on the page, and the subscript displayed in the array in the parent component.
 
-```vue
+```html
 // parent component
 <template>
   <div class="section">
@@ -73,30 +72,30 @@ On the basis of the previous example, click on the item of the ariticle rendered
 </template>
 
 <script>
-import comArticle from "./test/article.vue"
-export default {
-  name: "HelloWorld",
-  components: { comArticle },
-  data() {
-    return {
-      currentIndex: -1,
-      articleList: [
-        "Introduction to Web Dev",
-        "Computer Network",
-        "CSS in 30s",
-      ],
-    }
-  },
-  methods: {
-    onEmitIndex(idx) {
-      this.currentIndex = idx
+  import comArticle from "./test/article.vue"
+  export default {
+    name: "HelloWorld",
+    components: { comArticle },
+    data() {
+      return {
+        currentIndex: -1,
+        articleList: [
+          "Introduction to Web Dev",
+          "Computer Network",
+          "CSS in 30s",
+        ],
+      }
     },
-  },
-}
+    methods: {
+      onEmitIndex(idx) {
+        this.currentIndex = idx
+      },
+    },
+  }
 </script>
 ```
 
-```vue
+```html
 // child component
 <template>
   <div>
@@ -111,20 +110,20 @@ export default {
 </template>
 
 <script>
-export default {
-  props: ["articles"],
-  methods: {
-    emitIndex(index) {
-      this.$emit("onEmitIndex", index)
+  export default {
+    props: ["articles"],
+    methods: {
+      emitIndex(index) {
+        this.$emit("onEmitIndex", index)
+      },
     },
-  },
-}
+  }
 </script>
 ```
 
 ### 2. $children / $parent
 
-```vue
+```html
 // parent component
 <template>
   <div class="hello_world">
@@ -135,26 +134,26 @@ export default {
 </template>
 
 <script>
-import ComA from "./test/comA.vue"
-export default {
-  name: "HelloWorld",
-  components: { ComA },
-  data() {
-    return {
-      msg: "Welcome",
-    }
-  },
-  methods: {
-    changeA() {
-      // get child component A
-      this.$children[0].messageA = "this is new value"
+  import ComA from "./test/comA.vue"
+  export default {
+    name: "HelloWorld",
+    components: { ComA },
+    data() {
+      return {
+        msg: "Welcome",
+      }
     },
-  },
-}
+    methods: {
+      changeA() {
+        // get child component A
+        this.$children[0].messageA = "this is new value"
+      },
+    },
+  }
 </script>
 ```
 
-```vue
+```html
 // child component
 <template>
   <div class="com_a">
@@ -164,18 +163,18 @@ export default {
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      messageA: "this is old",
-    }
-  },
-  computed: {
-    parentVal() {
-      return this.$parent.msg
+  export default {
+    data() {
+      return {
+        messageA: "this is old",
+      }
     },
-  },
-}
+    computed: {
+      parentVal() {
+        return this.$parent.msg
+      },
+    },
+  }
 </script>
 ```
 
@@ -195,7 +194,7 @@ Few steps to use eventBus to achieve data communication between components:
 
 Create an event bus and export it so that other modules can use or monitor it.
 
-```vue
+```html
 import Vue from 'vue'; export const EventBus = new Vue();
 ```
 
@@ -203,7 +202,7 @@ import Vue from 'vue'; export const EventBus = new Vue();
 
 Suppose you have two components: additionNum and showNum, these two components can be sibling components or parent-child components; here we take sibling components as an example:
 
-```vue
+```html
 <template>
   <div>
     <show-num-com></show-num-com>
@@ -212,15 +211,15 @@ Suppose you have two components: additionNum and showNum, these two components c
 </template>
 
 <script>
-import showNumCom from "./showNum.vue"
-import additionNumCom from "./additionNum.vue"
-export default {
-  components: { showNumCom, additionNumCom },
-}
+  import showNumCom from "./showNum.vue"
+  import additionNumCom from "./additionNum.vue"
+  export default {
+    components: { showNumCom, additionNumCom },
+  }
 </script>
 ```
 
-```vue
+```html
 // addtionNum.vue : send event
 <template>
   <div>
@@ -229,21 +228,21 @@ export default {
 </template>
 
 <script>
-import { EventBus } from "./event-bus.js"
-export default {
-  data() {
-    return {
-      num: 1,
-    }
-  },
-  methods: {
-    additionHandle() {
-      EventBus.$emit("addition", {
-        num: this.num++,
-      })
+  import { EventBus } from "./event-bus.js"
+  export default {
+    data() {
+      return {
+        num: 1,
+      }
     },
-  },
-}
+    methods: {
+      additionHandle() {
+        EventBus.$emit("addition", {
+          num: this.num++,
+        })
+      },
+    },
+  }
 </script>
 ```
 
@@ -251,33 +250,31 @@ export default {
 
 In this way, click the add button in the component addtionNum.vue, and use the passed num in showNum.vue to display the result of the summation.
 
-```vue
+```html
 // showNum.vue : receive event
-
 <template>
   <div>Sum: {{ count }}</div>
 </template>
-
 <script>
-import { EventBus } from "./event-bus.js"
-export default {
-  data() {
-    return {
-      count: 0,
-    }
-  },
-  mounted() {
-    EventBus.$on("addition", param => {
-      this.count = this.count + param.num
-    })
-  },
-}
+  import { EventBus } from "./event-bus.js"
+  export default {
+    data() {
+      return {
+        count: 0,
+      }
+    },
+    mounted() {
+      EventBus.$on("addition", param => {
+        this.count = this.count + param.num
+      })
+    },
+  }
 </script>
 ```
 
 #### 4. Remove Event Listener
 
-```vue
+```html
 import { eventBus } from 'event-bus.js'; EventBus.$off('addition', {});
 ```
 

@@ -54,7 +54,7 @@ Image processing usually refers to using computer algorithms to perform operatio
 
 For each pixel in an image, it has different sizes and channels. We normally see the general color digital image in computer is 8 bits and has 3 channels which are r, g, b respectively. For 8 bits pixel, its value is from 0 to 255. We call the value gray-scale or gray-level. 0 is the lowest level which is black and 255 is the highest level which is white and it also has 253 different levels between 2 extreme levels shown in Figure 1. For a black and white image, it only have one channel and we can represent it only by different pixels with its gray-scale values. For a color image, it has three channels and we need triple values for that to mix r, g, b together to show different color values.
 
-![Alt Text](../../.vuepress/images/steganography/1.png)
+![img](1.png)
 
 ### Operations on pixels
 
@@ -78,7 +78,7 @@ Most steganography applications are used for increasing security such as copyrig
 
 There are many steganography methods nowadays. The classical one is to hide the message into boundaries of the image. For the reason human eye is hard to tell small differences between two images, we can add values of messages into four boundaries of the image, If the length of message is small, this steganography method works well due to its eficiency and simpleness. However, it is not secure because it is so obvious to be checked once values in this image are analyzed. It is weird since values of background are changed only in boundary areas and that may cause the security of message. The other classical method is called least significant bit steganography shown in Figure 2. It obtains binary values of message firstly and divides these binary values into 4 parts then adds each two bits into the end of pixels values in the image. This is a good method but will modify the original a lot which also can be detected. Inspired by some steganography methods, we create a new secure eficient algorithm used in steganography which is discussed in the next part.
 
-![Alt Text](../../.vuepress/images/steganography/2.png)
+![img](2.png)
 
 ## New Algorithm
 
@@ -96,15 +96,15 @@ Based on this obtained conclusion, a new idea is that we can change the color of
 
 Figure 3 - The original color:
 
-![Alt Text](../../.vuepress/images/steganography/3.png)
+![img](3.png)
 
 Figure 4 - By adding 100:
 
-![Alt Text](../../.vuepress/images/steganography/4.png)
+![img](4.png)
 
 Figure 5 - By adding 5:
 
-![Alt Text](../../.vuepress/images/steganography/5.png)
+![img](5.png)
 
 ## Implementation
 
@@ -114,27 +114,27 @@ To realize our algorithm, we plan to write source code by python to show both en
 
 Basically, our algorithm for steganography is a symmetric encryption. The structure is shown in Figure 6 where the secret key is the image. We both use the image for encryption and decryption. The pseudo-code is in Algorithm 1 to show some important processes.
 
-![Alt Text](../../.vuepress/images/steganography/6.png)
+![img](6.png)
 
-![Alt Text](../../.vuepress/images/steganography/7.png)
+![img](7.png)
 
 ### Programming Code
 
 In this section, we illustrate detailed steps in programming, basic ideas for modeling and core points in operations.
 
-#### Step 1: setting up
+#### Step 1: Setting up
 
 Firstly we read the provided image and store it into array 'img' by number python. We also obtain the shape of the image which contains rows, columns and dimensions. Then we read plaintext and put it into array 'msg' and create a new one dimension array data to store ASCII values of all characters in plaintext.
 
-#### Step 2: selecting positions
+#### Step 2: Selecting Positions
 
 We randomly generate coordinates in the image for each character in plain- text. For each chosen pixel with its 8 neighbors, they have 2 pixel intervals between nearby outside pixels in order to make sure each position can create a safe environment for adding divided characters. We use array 'record' to make current positions occupied for next selecting. After obtaining all co- ordinates for all characters in plaintext, we sort these coordinates by from top to bottom and from left to right, then we can have a new sorted array 'sorted key'.
 
-#### Step 3: encryption
+#### Step 3: Encryption
 
 For each character in plaintext, according to its assigned coordinate in sort key, we separate the value from 3 dimensions first which can be understood dividing the value into three parts. We use an array 'rgb' to store them. Further, we divide these three parts into 9 parts with respect to the pixel in corresponding coordinate and its 8 neighbors. Once we obtain 27 parts in total, we can add these small number into that pixel with its neighbors for all r,g,b dimensions. At last, the values in the original image is changed by adding ASCII values of all characters in plaintext.
 
-#### Step 4: decryption
+#### Step 4: Decryption
 
 In encryption, we divide ASCII values of each character in plaintext into 27 parts and add them into selected pixel with its 8 neighbors. So in decryption, we only need to subtract the values in original image from processed image which has been added values, then following the order we set in step 2, we can easily obtain 27 pieces values in each character detecting operation. Because we set 2 spaces intervals for each coordinate, so the character detecting can only check if the coordinate and its 8 neighbors in the subtracted image are all non zero. If it is true which means that coordinate hides the value of character in plaintext then we can extract it with its 8 neighbors by 3 dimensions and add all of them together to obtain the ASCII value of that character. By repeating this process till checking all pixels in the subtracted image has been done, we can have ASCII values of all characters from plaintext and translate them into character then we can obtain the plaintext.
 
@@ -142,9 +142,9 @@ In encryption, we divide ASCII values of each character in plaintext into 27 par
 
 By comparing the original image and the ciphered image in Figure 7, we can not distinguish any difference only by human eyes and we may think that ciphered image is the original one. Even for machine, it is hard to detect if the image has been modified because we only change the values of some pixels randomly and sightly. In addition, we only decrease the saturation of some pixels to a very small level without changing hue. Figure 8 confirms programming works well which can exactly recover the plaintext from the ciphered image.
 
-![Alt Text](../../.vuepress/images/steganography/8.png)
+![img](8.png)
 
-![Alt Text](../../.vuepress/images/steganography/9.png)
+![img](9.png)
 
 ## Conclusion
 
