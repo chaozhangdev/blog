@@ -48,7 +48,8 @@ const Bio = () => {
           <strong>
             <a href="https://github.com/chaozhangdev">{author.name}</a>
           </strong>
-          . <br />A software developer focusing on frontend dev.
+          . <br />
+          The accumulation of technologies.
         </p>
       )}
     </div>
