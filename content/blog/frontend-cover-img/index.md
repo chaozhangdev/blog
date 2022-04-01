@@ -14,15 +14,17 @@ There are genral 4 steps including uploading the video to the server
 
 ### Step 0: Get the video from local disk, obtain the temp video url to play and transfer it to array buffer
 
-```ts
-const getBinaryDataFromFile = async (e: any) => {
+```js
+async function getBinaryDataFromFile(e) {
   let file = e.target.files[0]
+  let videoURL = null
+  let buffer = null
   if (file.type !== "video/mp4") {
     toast.error("Video must be .mp4 type.")
   } else {
-    const videoURL: any = URL.createObjectURL(file)
+    videoURL = URL.createObjectURL(file)
+    buffer = await file.arrayBuffer()
     setTempVideoURL(videoURL)
-    const buffer = await file.arrayBuffer()
     setBinaryFile(buffer)
   }
 }
@@ -34,9 +36,9 @@ Get the screen shot of the playing video to generate the cover image which is th
 
 Here, I used a node module called [video-snapshot](https://www.npmjs.com/package/video-snapshot)
 
-```ts
-const getScreenShotFromVideo = async (e: any) => {
-  let file = e.target.files[0]
+```js
+async function getScreenShotFromVideo(e) {
+  const file = e.target.files[0]
   const snapshoter = new VideoSnapshot(file)
   const previewSrc = await snapshoter.takeSnapshot()
   setVideoScreenShot(previewSrc)
@@ -47,7 +49,7 @@ const getScreenShotFromVideo = async (e: any) => {
 
 Put the cover image into AWS S3 bucket first.
 
-```ts
+```js
 const canvas = await html2canvas(exportRef.current)
 const src = canvas.toDataURL("image/png", 1.0)
 const fetchRes = await fetch(src)
@@ -57,7 +59,7 @@ const file = new File([blob], `coverimage${time}.png`, blob)
 const FormData = require("form-data")
 const formData = new FormData()
 formData.append("file", file)
-let res = await request.post("video/uploadCover", formData)
+const res = await request.post("video/uploadCover", formData)
 const coverImgURL = res.data.code === 200 ? res.data.data.url : ""
 ```
 
@@ -66,16 +68,19 @@ const coverImgURL = res.data.code === 200 ? res.data.data.url : ""
 Put the video into AWS S3 then, showing the real time percentage by the call back function in axios.
 
 ```ts
-res = await request.post("video/getUploadUrl")
+const res = await request.post("video/getUploadUrl")
 const videoURL = res.data.data.url
+let current = null
+let total = null
+let percent = null
 await axios.put(videoURL, binaryFile, {
   headers: {
     "Content-Type": "video/mp4",
   },
   onUploadProgress: progressEvent => {
-    let current: number = progressEvent.loaded
-    let total: number = progressEvent.total
-    let percent: number = Math.floor((current / total) * 100)
+    current = progressEvent.loaded
+    total = progressEvent.total
+    percent = Math.floor((current / total) * 100)
     setLoadingPercentage(percent)
   },
 })
@@ -87,26 +92,26 @@ await axios.put(videoURL, binaryFile, {
 
 Commit uploading video with the cover image.
 
-```ts
-    const payload = {
-      category_id: getCategoryIDbyName(),
-      title: title,
-      tags: tags === [] ? "" : tags.join(","),
-      video_url: uploadURL,
-      thumb: coverImgURL,
-    };
-    request
-      .post("video/uploadCommit", payload)
-      .then((res) => {
-        if (res.data.code === 200) {
-          toast.success("success！");
-        } else {
-          console.log(res);
-          toast.error("failure！");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+```js
+const payload = {
+  category_id: getCategoryIDbyName(),
+  title: title,
+  tags: tags === [] ? "" : tags.join(","),
+  video_url: uploadURL,
+  thumb: coverImgURL,
+}
+
+request
+  .post("video/uploadCommit", payload)
+  .then(res => {
+    if (res.data.code === 200) {
+      toast.success("success！")
+    } else {
+      console.log(res)
+      toast.error("failure！")
+    }
+  })
+  .catch(err => {
+    console.log(err)
+  })
 ```
