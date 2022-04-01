@@ -12,7 +12,9 @@ My solution is: get the video from the local disk => generate the temp url and p
 
 There are genral 4 steps including uploading the video to the server
 
-### Step 0: Get the video from local disk, obtain the temp video url to play and transfer it to array buffer
+### Step 0
+
+Get the video from local disk, obtain the temp video url to play and transfer it to array buffer
 
 ```js
 async function getBinaryDataFromFile(e) {
@@ -105,10 +107,10 @@ request
   .post("video/uploadCommit", payload)
   .then(res => {
     if (res.data.code === 200) {
-      toast.success("success！")
+      toast.success("success!")
     } else {
       console.log(res)
-      toast.error("failure！")
+      toast.error("failure!")
     }
   })
   .catch(err => {
